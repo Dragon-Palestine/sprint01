@@ -1,0 +1,23 @@
+/**
+ * Employee List Component Styles
+ */
+.employee-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text);
+  font-size: 1.1em;
+}
+
+.no-results::before {
+  content: "📭";
+  display: block;
+  font-size: 3em;
+  margin-bottom: 20px;
+}
