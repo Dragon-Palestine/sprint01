@@ -7,57 +7,62 @@ This is a professional React + Vite application with a scalable, feature-based a
 ## Directory Structure
 
 ```
-react/
-├── public/                          # Static assets (images, icons)
-│   ├── favicon.svg
-│   └── icons.svg
-│
-├── src/
-│   ├── assets/                      # Project assets (images, icons)
-│   │   ├── react.svg
-│   │   ├── vite.svg
-│   │   └── hero.png
+sprint01/
+├── README.md                         # This file
+├── PROJECT_STRUCTURE.md              # Project structure documentation
+├── react/
+│   ├── public/                       # Static assets (images, icons)
+│   │   ├── favicon.svg
+│   │   └── icons.svg
 │   │
-│   ├── features/                    # Feature-based modules
-│   │   └── employees/               # Employee management feature
-│   │       ├── components/          # Feature-specific components
-│   │       │   ├── SearchBar.jsx
-│   │       │   ├── FilterPanel.jsx
-│   │       │   ├── EmployeeCard.jsx
-│   │       │   ├── EmployeeList.jsx
-│   │       │   └── index.js         # Component exports
-│   │       │
-│   │       ├── constants/           # Feature constants
-│   │       │   ├── employeesConstants.js
-│   │       │   └── index.js         # Constant exports
-│   │       │
-│   │       ├── data/                # Data generation and exports
-│   │       │   ├── employeeGenerator.js
-│   │       │   ├── employeesData.js
-│   │       │   └── index.js         # Data exports
-│   │       │
-│   │       ├── styles/              # Feature-specific styles
-│   │       │   ├── searchBar.css
-│   │       │   ├── filterBar.css
-│   │       │   ├── employeeCard.css
-│   │       │   └── employeeList.css
-│   │       │
-│   │       └── index.js             # Feature module exports
+│   ├── src/
+│   │   ├── assets/                  # Project assets (images, icons)
+│   │   │   ├── react.svg
+│   │   │   ├── vite.svg
+│   │   │   └── hero.png
+│   │   │
+│   │   ├── features/                # Feature-based modules
+│   │   │   └── employees/           # Employee management feature
+│   │   │       ├── components/      # Feature-specific components
+│   │   │       │   ├── SearchBar.jsx
+│   │   │       │   ├── FilterPanel.jsx
+│   │   │       │   ├── EmployeeCard.jsx
+│   │   │       │   ├── EmployeeList.jsx
+│   │   │       │   └── index.js     # Component exports
+│   │   │       │
+│   │   │       ├── constants/       # Feature constants
+│   │   │       │   ├── employeesConstants.js
+│   │   │       │   └── index.js     # Constant exports
+│   │   │       │
+│   │   │       ├── data/            # Data generation and exports
+│   │   │       │   ├── employeeGenerator.js
+│   │   │       │   ├── employeesData.js
+│   │   │       │   └── index.js     # Data exports
+│   │   │       │
+│   │   │       ├── styles/          # Feature-specific styles
+│   │   │       │   ├── searchBar.css
+│   │   │       │   ├── filterBar.css
+│   │   │       │   ├── employeeCard.css
+│   │   │       │   └── employeeList.css
+│   │   │       │
+│   │   │       └── index.js         # Feature module exports
+│   │   │
+│   │   ├── styles/                  # Global styles
+│   │   │   ├── globals.css          # Global CSS variables and resets
+│   │   │   └── app.css              # App layout styles
+│   │   │
+│   │   ├── App.jsx                  # Root component
+│   │   └── main.jsx                 # Application entry point
 │   │
-│   ├── styles/                      # Global styles
-│   │   ├── globals.css              # Global CSS variables and resets
-│   │   └── app.css                  # App layout styles
+│   ├── dist/                        # Build output (generated)
+│   ├── node_modules/                # Dependencies (generated)
 │   │
-│   ├── App.jsx                      # Root component
-│   └── main.jsx                     # Application entry point
-│
-├── .gitignore
-├── index.html                       # HTML template
-├── package.json                     # Project dependencies
-├── vite.config.js                   # Vite configuration
-├── eslint.config.js                 # ESLint configuration
-├── PROJECT_STRUCTURE.md             # This file
-└── README.md                         # Project README
+│   ├── .gitignore
+│   ├── index.html                   # HTML template
+│   ├── package.json                 # Project dependencies
+│   ├── package-lock.json            # Dependency lock file
+│   ├── vite.config.js               # Vite configuration
+│   └── eslint.config.js             # ESLint configuration
 ```
 
 ## Architecture Principles

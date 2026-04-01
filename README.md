@@ -1,4 +1,3 @@
-
 # Employee Management System
 
 A professional, scalable **React + Vite** application demonstrating best practices for feature-based architecture and code organization.
@@ -7,11 +6,11 @@ A professional, scalable **React + Vite** application demonstrating best practic
 
 ## Features
 
-* 🔍 **Advanced Search** – Search employees by name or email
-* 🎯 **Smart Filtering** – Filter by department and employment status
-* 📊 **Large Dataset Handling** – Efficiently manages 1000+ employees with optimized rendering
-* 📱 **Responsive Design** – Works seamlessly on desktop and mobile devices
-* ♿ **Accessibility** – Built with ARIA labels and semantic HTML
+- 🔍 **Advanced Search** – Search employees by name or email
+- 🎯 **Smart Filtering** – Filter by department and employment status
+- 📊 **Large Dataset Handling** – Efficiently manages 1000+ employees with optimized rendering
+- 📱 **Responsive Design** – Works seamlessly on desktop and mobile devices
+- ♿ **Accessibility** – Built with ARIA labels and semantic HTML
 
 ---
 
@@ -22,23 +21,28 @@ See [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md) for detailed information abou
 ### Quick Overview
 
 ```
-react/
-├── public/                          # Static assets
-│   ├── favicon.svg
-│   └── icons.svg
-├── src/
-│   ├── features/employees/          # Employee management feature
-│   │   ├── components/              # SearchBar, FilterPanel, etc.
-│   │   ├── constants/               # Feature constants
-│   │   ├── data/                    # Employee data generation
-│   │   └── styles/                  # Feature styles
-│   ├── styles/                      # Global styles
-│   ├── App.jsx                      # Root component
-│   └── main.jsx                     # Entry point
-├── package.json
-├── vite.config.js
-├── index.html
-└── eslint.config.js
+sprint01/
+├── README.md                         # Project README
+├── PROJECT_STRUCTURE.md              # Project structure documentation
+├── react/
+│   ├── public/                       # Static assets
+│   │   ├── favicon.svg
+│   │   └── icons.svg
+│   ├── src/
+│   │   ├── features/employees/       # Employee management feature
+│   │   │   ├── components/           # SearchBar, FilterPanel, etc.
+│   │   │   ├── constants/            # Feature constants
+│   │   │   ├── data/                 # Employee data generation
+│   │   │   └── styles/               # Feature styles
+│   │   ├── styles/                   # Global styles
+│   │   ├── App.jsx                   # Root component
+│   │   ├── assets/                   # Project assets
+│   │   └── main.jsx                  # Entry point
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── index.html
+│   ├── eslint.config.js
+│   └── .gitignore
 ```
 
 ---
@@ -47,8 +51,8 @@ react/
 
 ### Prerequisites
 
-* Node.js (v14 or higher)
-* npm or yarn
+- Node.js (v14 or higher)
+- npm or yarn
 
 ### Installation
 
@@ -73,10 +77,10 @@ npm run lint
 
 ## Available Scripts
 
-* `npm run dev` – Start development server with hot module replacement
-* `npm run build` – Build optimized production bundle
-* `npm run preview` – Preview production build locally
-* `npm run lint` – Check code quality with ESLint
+- `npm run dev` – Start development server with hot module replacement
+- `npm run build` – Build optimized production bundle
+- `npm run preview` – Preview production build locally
+- `npm run lint` – Check code quality with ESLint
 
 ---
 
@@ -84,10 +88,10 @@ npm run lint
 
 ### Feature-Based Organization
 
-* Groups all related files (components, hooks, utilities, styles) for each feature together
-* Improves maintainability, scalability, and team collaboration
-* Simplifies adding or removing features
-* Promotes component reusability
+- Groups all related files (components, hooks, utilities, styles) for each feature together
+- Improves maintainability, scalability, and team collaboration
+- Simplifies adding or removing features
+- Promotes component reusability
 
 ### Module Exports
 
@@ -102,9 +106,9 @@ import { SearchBar, FilterPanel } from "./features/employees/components";
 
 ### Performance Optimization
 
-* Uses `useMemo` hook for filtering large datasets
-* Components properly split for React optimizations
-* CSS organized to minimize bundle size
+- Uses `useMemo` hook for filtering large datasets
+- Components properly split for React optimizations
+- CSS organized to minimize bundle size
 
 ---
 
@@ -112,24 +116,24 @@ import { SearchBar, FilterPanel } from "./features/employees/components";
 
 ### Global Styles (`src/styles/globals.css`)
 
-* CSS variables for consistent theming
-* CSS resets and base styles
-* Dark mode support
+- CSS variables for consistent theming
+- CSS resets and base styles
+- Dark mode support
 
 ### Feature Styles (`src/features/[feature]/styles/`)
 
-* Component-specific styles
-* Co-located with components for easy maintenance
-* BEM-like naming conventions
+- Component-specific styles
+- Co-located with components for easy maintenance
+- BEM-like naming conventions
 
 ---
 
 ## Browser Support
 
-* Chrome (latest)
-* Firefox (latest)
-* Safari (latest)
-* Edge (latest)
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ---
 
@@ -146,11 +150,11 @@ import { SearchBar, FilterPanel } from "./features/employees/components";
 
 ## Development Best Practices
 
-* **Component Naming** – PascalCase for components
-* **File Organization** – Keep related files together in feature folders
-* **Exports** – Use `index.js` files for clean exports
-* **Documentation** – Add JSDoc comments to components and utilities
-* **Scalability** – Add new features in `src/features/[feature-name]`
+- **Component Naming** – PascalCase for components
+- **File Organization** – Keep related files together in feature folders
+- **Exports** – Use `index.js` files for clean exports
+- **Documentation** – Add JSDoc comments to components and utilities
+- **Scalability** – Add new features in `src/features/[feature-name]`
 
 ---
 
@@ -158,25 +162,25 @@ import { SearchBar, FilterPanel } from "./features/employees/components";
 
 ### Handling 1000+ Employees
 
-* Memoized filtering with `useMemo`
-* Grid-based CSS layout
-* Optimized component rendering
+- Memoized filtering with `useMemo`
+- Grid-based CSS layout
+- Optimized component rendering
 
 ### Memory Optimization
 
-* Employee data generated once at app startup
-* Filtering memoized to prevent unnecessary re-renders
-* No external API calls (data generated locally)
+- Employee data generated once at app startup
+- Filtering memoized to prevent unnecessary re-renders
+- No external API calls (data generated locally)
 
 ---
 
 ## Tech Stack
 
-* **Framework**: React 19.2.4
-* **Build Tool**: Vite 8.0.1
-* **Package Manager**: npm
-* **Code Quality**: ESLint 9.39.4
-* **Development**: Node.js
+- **Framework**: React 19.2.4
+- **Build Tool**: Vite 8.0.1
+- **Package Manager**: npm
+- **Code Quality**: ESLint 9.39.4
+- **Development**: Node.js
 
 ---
 
@@ -189,4 +193,3 @@ This project is part of the **Sprint 1 learning initiative**.
 ## Support
 
 For issues or questions, refer to [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md).
-
