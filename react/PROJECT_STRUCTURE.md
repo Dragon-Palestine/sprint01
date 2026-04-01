@@ -7,9 +7,10 @@ This is a professional React + Vite application with a scalable, feature-based a
 ## Directory Structure
 
 ```
-my-react-app/
+react/
 ├── public/                          # Static assets (images, icons)
-│   └── (publicly accessible files)
+│   ├── favicon.svg
+│   └── icons.svg
 │
 ├── src/
 │   ├── assets/                      # Project assets (images, icons)
