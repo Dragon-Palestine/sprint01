@@ -28,6 +28,10 @@ sprint01/
 │   │   │       │   ├── FilterPanel.jsx
 │   │   │       │   ├── EmployeeCard.jsx
 │   │   │       │   ├── EmployeeList.jsx
+│   │   │       │   ├── Pagination.jsx
+│   │   │       │   ├── AddEmployeeForm.jsx
+│   │   │       │   ├── EditEmployeeForm.jsx
+│   │   │       │   ├── AddEmployeePage.jsx
 │   │   │       │   └── index.js     # Component exports
 │   │   │       │
 │   │   │       ├── constants/       # Feature constants
@@ -38,6 +42,10 @@ sprint01/
 │   │   │       │   ├── employeeGenerator.js
 │   │   │       │   ├── employeesData.js
 │   │   │       │   └── index.js     # Data exports
+│   │   │       │
+│   │   │       ├── services/        # Feature services (API calls, data management)
+│   │   │       │   ├── employeesService.js
+│   │   │       │   └── index.js     # Service exports
 │   │   │       │
 │   │   │       ├── styles/          # Feature-specific styles
 │   │   │       │   ├── searchBar.css
@@ -52,7 +60,8 @@ sprint01/
 │   │   │   └── app.css              # App layout styles
 │   │   │
 │   │   ├── App.jsx                  # Root component
-│   │   └── main.jsx                 # Application entry point
+│   │   ├── main.jsx                 # Application entry point
+│   │   ├── ErrorBoundary.jsx        # Error boundary component
 │   │
 │   ├── dist/                        # Build output (generated)
 │   ├── node_modules/                # Dependencies (generated)
@@ -97,10 +106,11 @@ sprint01/
 
 ### 5. **Styling Strategy**
 
+- Bootstrap 5 for responsive, component-based UI
 - Global styles in `src/styles/globals.css` (variables, resets)
 - Feature-specific styles co-located with components
+- Dark mode support via Bootstrap's `data-bs-theme` attribute
 - CSS modules/BEM naming convention for maintainability
-- Consistent use of CSS variables for theming
 
 ## Key Features
 
@@ -109,10 +119,17 @@ sprint01/
 Located in `src/features/employees/`, this feature provides:
 
 - **Components**:
-  - `SearchBar`: Search functionality
+  - `SearchBar`: Search functionality with debouncing
   - `FilterPanel`: Filter by department and status
-  - `EmployeeCard`: Individual employee display
-  - `EmployeeList`: Grid of employee cards
+  - `EmployeeCard`: Individual employee display with Bootstrap cards
+  - `EmployeeList`: Responsive grid of employee cards
+  - `Pagination`: Bootstrap pagination for large datasets
+  - `AddEmployeeForm`: Form for adding new employees
+  - `EditEmployeeForm`: Form for editing existing employees
+  - `AddEmployeePage`: Page component for adding employees
+
+- **Services**:
+  - `employeesService.js`: CRUD operations for employee data
 
 - **Data**:
   - `employeeGenerator.js`: Generates random employee data
@@ -121,10 +138,13 @@ Located in `src/features/employees/`, this feature provides:
 
 ### Global Infrastructure
 
+- Bootstrap 5 for responsive, modern UI components
+- Dark Mode support with localStorage persistence
 - CSS variables for consistent theming
 - Responsive design patterns
 - Accessibility attributes (ARIA labels)
-- Optimized performance with useMemo
+- Error boundaries for error handling
+- Optimized performance with useMemo and debouncing
 
 ## Contributing Guidelines
 
@@ -146,8 +166,6 @@ When adding new features:
 ## Future Enhancements
 
 - Add TypeScript for type safety
-- Implement React Router for multi-page navigation
-- Add state management (Context API or Redux)
+- Implement state management (Context API or Redux) for complex state
 - Add unit and integration tests
-- Implement API integration layer
-- Add more features following the same structure
+- Implement API integration for real data persistence
