@@ -7,27 +7,27 @@ const ITEMS_PER_PAGE = 12;
 
 function EmployeeList({ employees }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [prevEmployees, setPrevEmployees] = useState(employees);
 
-  const effectivePage =
-    employees !== prevEmployees ? 1 : currentPage;
 
-  useEffect(() => {
-    setPrevEmployees(employees);
-  }, [employees]);
+  const [lastEmployees, setLastEmployees] = useState(employees);
+
+  let displayPage = currentPage;
+  if (employees !== lastEmployees) {
+    setLastEmployees(employees);
+    setCurrentPage(1);
+    displayPage = 1;
+  }
 
   const totalPages = Math.ceil(employees.length / ITEMS_PER_PAGE);
 
   const paginatedEmployees = useMemo(() => {
-    const startIndex = (effectivePage - 1) * ITEMS_PER_PAGE;
+    const startIndex = (displayPage - 1) * ITEMS_PER_PAGE;
     return employees.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  }, [employees, effectivePage]);
+  }, [employees, displayPage]);
 
   if (!employees || employees.length === 0) {
     return (
-      <p className="no-results">
-        No employees found matching your criteria.
-      </p>
+      <p className="no-results">No employees found matching your criteria.</p>
     );
   }
 
@@ -40,7 +40,7 @@ function EmployeeList({ employees }) {
       </div>
 
       <Pagination
-        currentPage={effectivePage}
+        currentPage={displayPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
