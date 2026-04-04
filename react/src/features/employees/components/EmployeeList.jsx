@@ -5,7 +5,7 @@ import "../styles/employeeList.css";
 
 const ITEMS_PER_PAGE = 12;
 
-function EmployeeList({ employees }) {
+function EmployeeList({ employees, onEdit, onDelete }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [lastEmployees, setLastEmployees] = useState(employees);
@@ -36,7 +36,12 @@ function EmployeeList({ employees }) {
     <>
       <div className="employee-list">
         {paginatedEmployees.map((employee) => (
-          <EmployeeCard key={employee.id} employee={employee} />
+          <EmployeeCard
+            key={employee.id}
+            employee={employee}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
         ))}
       </div>
 

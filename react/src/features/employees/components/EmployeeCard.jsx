@@ -12,8 +12,10 @@ import "../styles/employeeCard.css";
  * @param {string} employee.department - Employee department
  * @param {string} employee.position - Employee position
  * @param {string} employee.status - Employee status
+ * @param {Function} onEdit - Callback for editing employee
+ * @param {Function} onDelete - Callback for deleting employee
  */
-function EmployeeCard({ employee }) {
+function EmployeeCard({ employee, onEdit, onDelete }) {
   return (
     <div className="employee-card">
       <h3>{employee.name}</h3>
@@ -38,6 +40,10 @@ function EmployeeCard({ employee }) {
           {employee.status}
         </span>
       </p>
+      <div className="employee-actions">
+        <button onClick={() => onEdit(employee)}>Edit</button>
+        <button onClick={() => onDelete(employee.id)}>Delete</button>
+      </div>
     </div>
   );
 }

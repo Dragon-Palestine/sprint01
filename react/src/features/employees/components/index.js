@@ -8,3 +8,6 @@ export { default as FilterPanel } from "./FilterPanel";
 export { default as EmployeeCard } from "./EmployeeCard";
 export { default as EmployeeList } from "./EmployeeList";
 export { default as Pagination } from "./Pagination";
+export { default as AddEmployeeForm } from "./AddEmployeeForm";
+export { default as EditEmployeeForm } from "./EditEmployeeForm";
+export { default as AddEmployeePage } from "./AddEmployeePage";

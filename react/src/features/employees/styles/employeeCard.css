@@ -74,6 +74,40 @@
   display: inline-block;
 }
 
+/* Employee Actions */
+.employee-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.employee-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.employee-actions button:first-child {
+  background-color: #ffc107;
+  color: black;
+}
+
+.employee-actions button:first-child:hover {
+  background-color: #e0a800;
+}
+
+.employee-actions button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.employee-actions button:last-child:hover {
+  background-color: #c82333;
+}
+
 @media (max-width: 1024px) {
   .employee-card {
     width: calc(50% - 24px);
