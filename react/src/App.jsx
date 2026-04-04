@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import "./styles/app.css";
 
 // Importing from the employees feature module
@@ -19,13 +19,26 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+  // New state to store the filtered value after the debounce delay
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  // Implementing Debouncing logic
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 1000); // 1000ms delay
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
 
   // Use useMemo to optimize performance when handling 1000 employees
   const filteredEmployees = useMemo(() => {
     return ALL_EMPLOYEES.filter((employee) => {
       const matchesSearch =
-        employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.email.toLowerCase().includes(searchTerm.toLowerCase());
+        employee.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        employee.email.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
 
       const matchesDept =
         selectedDepartment === "" || employee.department === selectedDepartment;
@@ -34,7 +47,7 @@ function App() {
 
       return matchesSearch && matchesDept && matchesStatus;
     });
-  }, [searchTerm, selectedDepartment, selectedStatus]);
+  }, [debouncedSearchTerm, selectedDepartment, selectedStatus]);
 
   return (
     <div className="App">

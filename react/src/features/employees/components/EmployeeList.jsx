@@ -8,11 +8,12 @@ const ITEMS_PER_PAGE = 12;
 function EmployeeList({ employees }) {
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const [lastEmployees, setLastEmployees] = useState(employees);
 
   let displayPage = currentPage;
   if (employees !== lastEmployees) {
+    // If the employees array changes (due to filtering), reset the page to 1 programmatically
+    // This resolves potential render errors and optimizes speed
     setLastEmployees(employees);
     setCurrentPage(1);
     displayPage = 1;
