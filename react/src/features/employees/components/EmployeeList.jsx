@@ -1,11 +1,13 @@
 import React, { useState, useMemo } from "react";
+import { FixedSizeList as List } from "react-window";
 import EmployeeCard from "./EmployeeCard";
 import Pagination from "./Pagination";
 import "../styles/employeeList.css";
 
 const ITEMS_PER_PAGE = 12;
+const ITEM_HEIGHT = 200; // Approximate height of EmployeeCard
 
-function EmployeeList({ employees, onEdit, onDelete }) {
+const EmployeeList = React.memo(({ employees, onEdit, onDelete }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [lastEmployees, setLastEmployees] = useState(employees);
@@ -34,16 +36,22 @@ function EmployeeList({ employees, onEdit, onDelete }) {
 
   return (
     <>
-      <div className="employee-list">
-        {paginatedEmployees.map((employee) => (
-          <EmployeeCard
-            key={employee.id}
-            employee={employee}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        ))}
-      </div>
+      <List
+        height={ITEM_HEIGHT * ITEMS_PER_PAGE} // Height for 12 items
+        itemCount={paginatedEmployees.length}
+        itemSize={ITEM_HEIGHT}
+        width="100%"
+      >
+        {({ index, style }) => (
+          <div style={style}>
+            <EmployeeCard
+              employee={paginatedEmployees[index]}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          </div>
+        )}
+      </List>
 
       <Pagination
         currentPage={displayPage}
@@ -52,6 +60,6 @@ function EmployeeList({ employees, onEdit, onDelete }) {
       />
     </>
   );
-}
+});
 
 export default EmployeeList;

@@ -8,7 +8,7 @@ import "../styles/searchBar.css";
  * @param {string} searchTerm - Current search term value
  * @param {Function} onSearchChange - Callback when search term changes
  */
-function SearchBar({ searchTerm, onSearchChange }) {
+const SearchBar = React.memo(({ searchTerm, onSearchChange }) => {
   return (
     <div className="search-bar">
       <input
@@ -20,6 +20,6 @@ function SearchBar({ searchTerm, onSearchChange }) {
       />
     </div>
   );
-}
+});
 
 export default SearchBar;

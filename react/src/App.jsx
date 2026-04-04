@@ -1,4 +1,11 @@
-import { useState, useMemo, useEffect } from "react";
+import {
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+  lazy,
+  Suspense,
+} from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./styles/app.css";
 
@@ -10,7 +17,6 @@ import {
   FilterPanel,
   EmployeeList,
   EditEmployeeForm,
-  AddEmployeePage,
 } from "./features/employees";
 import {
   getEmployees,
@@ -18,6 +24,10 @@ import {
   updateEmployee,
   deleteEmployee,
 } from "./features/employees/services/employeesService.js";
+
+const AddEmployeePage = lazy(
+  () => import("./features/employees/components/AddEmployeePage"),
+);
 
 /**
  * App Component
@@ -77,7 +87,7 @@ function App() {
     return filtered;
   }, [employees, debouncedSearchTerm, selectedDepartment, selectedStatus]);
 
-  const handleAddEmployee = (employeeData) => {
+  const handleAddEmployee = useCallback((employeeData) => {
     try {
       console.log("handleAddEmployee called with:", employeeData);
       const newEmployee = addEmployee(employeeData);
@@ -88,13 +98,13 @@ function App() {
     } catch (error) {
       console.error("Error in handleAddEmployee:", error);
     }
-  };
+  }, []);
 
-  const handleEditEmployee = (employee) => {
+  const handleEditEmployee = useCallback((employee) => {
     setEditingEmployee(employee);
-  };
+  }, []);
 
-  const handleUpdateEmployee = (id, updatedData) => {
+  const handleUpdateEmployee = useCallback((id, updatedData) => {
     const updatedEmployee = updateEmployee(id, updatedData);
     if (updatedEmployee) {
       setEmployees((prev) =>
@@ -102,67 +112,73 @@ function App() {
       );
     }
     setEditingEmployee(null);
-  };
+  }, []);
 
-  const handleDeleteEmployee = (id) => {
+  const handleDeleteEmployee = useCallback((id) => {
     if (window.confirm("Are you sure you want to delete this employee?")) {
       const updatedEmployees = deleteEmployee(id);
       setEmployees(updatedEmployees);
     }
-  };
+  }, []);
 
-  const handleCancelForm = () => {
+  const handleCancelForm = useCallback(() => {
     setEditingEmployee(null);
-  };
+  }, []);
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="App">
-            <h1>Employee Management System</h1>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="App">
+              <h1>Employee Management System</h1>
 
-            <Link to="/add-employee">
-              <button className="add-employee-btn">Add New Employee</button>
-            </Link>
+              <Link to="/add-employee">
+                <button className="add-employee-btn">Add New Employee</button>
+              </Link>
 
-            {editingEmployee && (
-              <EditEmployeeForm
-                employee={editingEmployee}
-                onUpdate={handleUpdateEmployee}
-                onCancel={handleCancelForm}
+              {editingEmployee && (
+                <EditEmployeeForm
+                  employee={editingEmployee}
+                  onUpdate={handleUpdateEmployee}
+                  onCancel={handleCancelForm}
+                />
+              )}
+
+              <SearchBar
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
               />
-            )}
 
-            <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+              <FilterPanel
+                departments={DEPARTMENTS}
+                statuses={STATUSES}
+                selectedDepartment={selectedDepartment}
+                selectedStatus={selectedStatus}
+                onDepartmentChange={setSelectedDepartment}
+                onStatusChange={setSelectedStatus}
+              />
 
-            <FilterPanel
-              departments={DEPARTMENTS}
-              statuses={STATUSES}
-              selectedDepartment={selectedDepartment}
-              selectedStatus={selectedStatus}
-              onDepartmentChange={setSelectedDepartment}
-              onStatusChange={setSelectedStatus}
-            />
+              <p className="stats">
+                Showing {filteredEmployees.length} of {employees.length}{" "}
+                employees
+              </p>
 
-            <p className="stats">
-              Showing {filteredEmployees.length} of {employees.length} employees
-            </p>
-
-            <EmployeeList
-              employees={filteredEmployees}
-              onEdit={handleEditEmployee}
-              onDelete={handleDeleteEmployee}
-            />
-          </div>
-        }
-      />
-      <Route
-        path="/add-employee"
-        element={<AddEmployeePage onAdd={handleAddEmployee} />}
-      />
-    </Routes>
+              <EmployeeList
+                employees={filteredEmployees}
+                onEdit={handleEditEmployee}
+                onDelete={handleDeleteEmployee}
+              />
+            </div>
+          }
+        />
+        <Route
+          path="/add-employee"
+          element={<AddEmployeePage onAdd={handleAddEmployee} />}
+        />
+      </Routes>
+    </Suspense>
   );
 }
 

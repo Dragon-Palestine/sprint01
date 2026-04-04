@@ -1,14 +1,14 @@
 react memo -
-re-reandreing in react -
-pagantion -
+re-rendering in react -
+pagination -
 
-- ديباونسينغ
-انك تعمل هوكس بنفسك 
-use depaoncing hooks
+- Debouncing
+  You make hooks yourself
+  use debouncing hooks
 
-- custom hooks 
-- use memo 
-- memo 
-- hooks 
-- react router 
+- custom hooks
+- use memo
+- memo
+- hooks
+- react router
 - crud

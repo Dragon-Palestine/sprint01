@@ -15,7 +15,7 @@ import "../styles/employeeCard.css";
  * @param {Function} onEdit - Callback for editing employee
  * @param {Function} onDelete - Callback for deleting employee
  */
-function EmployeeCard({ employee, onEdit, onDelete }) {
+const EmployeeCard = React.memo(({ employee, onEdit, onDelete }) => {
   return (
     <div className="employee-card">
       <h3>{employee.name}</h3>
@@ -46,6 +46,6 @@ function EmployeeCard({ employee, onEdit, onDelete }) {
       </div>
     </div>
   );
-}
+});
 
 export default EmployeeCard;

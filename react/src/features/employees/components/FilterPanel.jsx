@@ -12,51 +12,53 @@ import "../styles/filterBar.css";
  * @param {Function} onDepartmentChange - Callback when department filter changes
  * @param {Function} onStatusChange - Callback when status filter changes
  */
-function FilterBar({
-  departments,
-  statuses,
-  selectedDepartment,
-  selectedStatus,
-  onDepartmentChange,
-  onStatusChange,
-}) {
-  return (
-    <div className="filter-bar">
-      <div className="filter-group">
-        <label htmlFor="department-filter">Department:</label>
-        <select
-          id="department-filter"
-          value={selectedDepartment}
-          onChange={(e) => onDepartmentChange(e.target.value)}
-          aria-label="Filter by department"
-        >
-          <option value="">All Departments</option>
-          {departments.map((dept) => (
-            <option key={dept} value={dept}>
-              {dept}
-            </option>
-          ))}
-        </select>
-      </div>
+const FilterBar = React.memo(
+  ({
+    departments,
+    statuses,
+    selectedDepartment,
+    selectedStatus,
+    onDepartmentChange,
+    onStatusChange,
+  }) => {
+    return (
+      <div className="filter-bar">
+        <div className="filter-group">
+          <label htmlFor="department-filter">Department:</label>
+          <select
+            id="department-filter"
+            value={selectedDepartment}
+            onChange={(e) => onDepartmentChange(e.target.value)}
+            aria-label="Filter by department"
+          >
+            <option value="">All Departments</option>
+            {departments.map((dept) => (
+              <option key={dept} value={dept}>
+                {dept}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="filter-group">
-        <label htmlFor="status-filter">Status:</label>
-        <select
-          id="status-filter"
-          value={selectedStatus}
-          onChange={(e) => onStatusChange(e.target.value)}
-          aria-label="Filter by status"
-        >
-          <option value="">All Statuses</option>
-          {statuses.map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
+        <div className="filter-group">
+          <label htmlFor="status-filter">Status:</label>
+          <select
+            id="status-filter"
+            value={selectedStatus}
+            onChange={(e) => onStatusChange(e.target.value)}
+            aria-label="Filter by status"
+          >
+            <option value="">All Statuses</option>
+            {statuses.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  },
+);
 
 export default FilterBar;

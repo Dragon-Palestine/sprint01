@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DEPARTMENTS,
   POSITIONS,
@@ -6,13 +6,6 @@ import {
 } from "../constants/employeesConstants.js";
 import "../styles/addEmployeeForm.css";
 
-/**
- * AddEmployeeForm Component
- * Form to add a new employee
- *
- * @param {Function} onAdd - Callback function to handle adding the employee
- * @param {Function} onCancel - Callback function to cancel the form
- */
 function AddEmployeeForm({ onAdd, onCancel }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -21,6 +14,18 @@ function AddEmployeeForm({ onAdd, onCancel }) {
     position: "",
     status: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [debouncedData, setDebouncedData] = useState(formData);
+
+  // Debouncing for every change in formData
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedData(formData);
+    }, 300); // 300ms delay before updating debouncedData
+
+    return () => clearTimeout(handler); // Clear the timer if a new change occurs before the time ends
+  }, [formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,14 +34,25 @@ function AddEmployeeForm({ onAdd, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isSubmitting) return; // Prevent double submission
+
+    const trimmedData = {
+      name: debouncedData.name.trim(),
+      email: debouncedData.email.trim(),
+      department: debouncedData.department,
+      position: debouncedData.position,
+      status: debouncedData.status,
+    };
+
     if (
-      formData.name &&
-      formData.email &&
-      formData.department &&
-      formData.position &&
-      formData.status
+      trimmedData.name &&
+      trimmedData.email &&
+      trimmedData.department &&
+      trimmedData.position &&
+      trimmedData.status
     ) {
-      onAdd(formData);
+      setIsSubmitting(true);
+      onAdd(trimmedData).finally(() => setIsSubmitting(false));
       setFormData({
         name: "",
         email: "",
@@ -64,6 +80,7 @@ function AddEmployeeForm({ onAdd, onCancel }) {
             required
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
@@ -75,6 +92,7 @@ function AddEmployeeForm({ onAdd, onCancel }) {
             required
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="department">Department:</label>
           <select
@@ -92,6 +110,7 @@ function AddEmployeeForm({ onAdd, onCancel }) {
             ))}
           </select>
         </div>
+
         <div className="form-group">
           <label htmlFor="position">Position:</label>
           <select
@@ -109,6 +128,7 @@ function AddEmployeeForm({ onAdd, onCancel }) {
             ))}
           </select>
         </div>
+
         <div className="form-group">
           <label htmlFor="status">Status:</label>
           <select
@@ -126,9 +146,12 @@ function AddEmployeeForm({ onAdd, onCancel }) {
             ))}
           </select>
         </div>
+
         <div className="form-actions">
-          <button type="submit">Add Employee</button>
-          <button type="button" onClick={onCancel}>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Adding..." : "Add Employee"}
+          </button>
+          <button type="button" onClick={onCancel} disabled={isSubmitting}>
             Cancel
           </button>
         </div>
