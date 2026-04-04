@@ -34,6 +34,7 @@ const AddEmployeePage = lazy(
  * Main application component for the Employee Management System
  */
 function App() {
+  console.log("App component rendering");
   const [employees, setEmployees] = useState(getEmployees());
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
