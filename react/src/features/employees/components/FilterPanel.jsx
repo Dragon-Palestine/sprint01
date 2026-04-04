@@ -22,11 +22,14 @@ const FilterBar = React.memo(
     onStatusChange,
   }) => {
     return (
-      <div className="filter-bar">
-        <div className="filter-group">
-          <label htmlFor="department-filter">Department:</label>
+      <div className="row mb-3">
+        <div className="col-md-6">
+          <label htmlFor="department-filter" className="form-label">
+            Department:
+          </label>
           <select
             id="department-filter"
+            className="form-select"
             value={selectedDepartment}
             onChange={(e) => onDepartmentChange(e.target.value)}
             aria-label="Filter by department"
@@ -40,10 +43,13 @@ const FilterBar = React.memo(
           </select>
         </div>
 
-        <div className="filter-group">
-          <label htmlFor="status-filter">Status:</label>
+        <div className="col-md-6">
+          <label htmlFor="status-filter" className="form-label">
+            Status:
+          </label>
           <select
             id="status-filter"
+            className="form-select"
             value={selectedStatus}
             onChange={(e) => onStatusChange(e.target.value)}
             aria-label="Filter by status"

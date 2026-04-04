@@ -17,32 +17,54 @@ import "../styles/employeeCard.css";
  */
 const EmployeeCard = React.memo(({ employee, onEdit, onDelete }) => {
   return (
-    <div className="employee-card">
-      <h3>{employee.name}</h3>
-      <p>
-        <strong>ID:</strong> {employee.id}
-      </p>
-      <p>
-        <strong>Email:</strong>{" "}
-        <a href={`mailto:${employee.email}`}>{employee.email}</a>
-      </p>
-      <p>
-        <strong>Department:</strong> {employee.department}
-      </p>
-      <p>
-        <strong>Position:</strong> {employee.position}
-      </p>
-      <p>
-        <strong>Status:</strong>{" "}
-        <span
-          className={`status-${employee.status.toLowerCase().replace(" ", "-")}`}
-        >
-          {employee.status}
-        </span>
-      </p>
-      <div className="employee-actions">
-        <button onClick={() => onEdit(employee)}>Edit</button>
-        <button onClick={() => onDelete(employee.id)}>Delete</button>
+    <div className="col-md-4 mb-4">
+      <div className="card h-100">
+        <div className="card-body">
+          <h5 className="card-title">{employee.name}</h5>
+          <p className="card-text">
+            <strong>ID:</strong> {employee.id}
+          </p>
+          <p className="card-text">
+            <strong>Email:</strong>{" "}
+            <a href={`mailto:${employee.email}`}>{employee.email}</a>
+          </p>
+          <p className="card-text">
+            <strong>Department:</strong> {employee.department}
+          </p>
+          <p className="card-text">
+            <strong>Position:</strong> {employee.position}
+          </p>
+          <p className="card-text">
+            <strong>Status:</strong>{" "}
+            <span
+              className={`badge ${
+                employee.status === "Active"
+                  ? "bg-success"
+                  : employee.status === "On Leave"
+                    ? "bg-warning"
+                    : employee.status === "Terminated"
+                      ? "bg-danger"
+                      : "bg-secondary"
+              }`}
+            >
+              {employee.status}
+            </span>
+          </p>
+          <div className="d-flex gap-2">
+            <button
+              className="btn btn-warning btn-sm"
+              onClick={() => onEdit(employee)}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-danger btn-sm"
+              onClick={() => onDelete(employee.id)}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

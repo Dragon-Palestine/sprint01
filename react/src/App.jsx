@@ -42,7 +42,9 @@ function App() {
   // New state to store the filtered value after the debounce delay
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [editingEmployee, setEditingEmployee] = useState(null);
-
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light",
+  );
   // Implementing Debouncing logic
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -53,6 +55,16 @@ function App() {
       clearTimeout(handler);
     };
   }, [searchTerm]);
+
+  // Theme effect
+  useEffect(() => {
+    document.documentElement.setAttribute("data-bs-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }, []);
 
   // Use useMemo to optimize performance when handling 1000 employees
   const filteredEmployees = useMemo(() => {
@@ -72,13 +84,6 @@ function App() {
 
       return matchesSearch && matchesDept && matchesStatus;
     });
-    console.log(
-      "Filtered employees count:",
-      filtered.length,
-      "from total:",
-      employees.length,
-    );
-    return filtered;
     console.log(
       "Filtered employees count:",
       filtered.length,
@@ -132,11 +137,21 @@ function App() {
         <Route
           path="/"
           element={
-            <div className="App">
-              <h1>Employee Management System</h1>
+            <div className="container mt-4">
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <h1>Employee Management System</h1>
+                <button
+                  className="btn btn-outline-secondary"
+                  onClick={toggleTheme}
+                >
+                  {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+                </button>
+              </div>
 
               <Link to="/add-employee">
-                <button className="add-employee-btn">Add New Employee</button>
+                <button className="btn btn-primary mb-3">
+                  Add New Employee
+                </button>
               </Link>
 
               {editingEmployee && (
@@ -161,7 +176,7 @@ function App() {
                 onStatusChange={setSelectedStatus}
               />
 
-              <p className="stats">
+              <p className="mt-3">
                 Showing {filteredEmployees.length} of {employees.length}{" "}
                 employees
               </p>

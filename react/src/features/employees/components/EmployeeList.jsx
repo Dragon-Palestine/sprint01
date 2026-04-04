@@ -34,7 +34,7 @@ const EmployeeList = React.memo(({ employees, onEdit, onDelete }) => {
 
   return (
     <>
-      <div className="employee-list">
+      <div className="row">
         {paginatedEmployees.map((employee) => (
           <EmployeeCard
             key={employee.id}

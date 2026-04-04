@@ -10,9 +10,10 @@ import "../styles/searchBar.css";
  */
 const SearchBar = React.memo(({ searchTerm, onSearchChange }) => {
   return (
-    <div className="search-bar">
+    <div className="mb-3">
       <input
         type="text"
+        className="form-control"
         placeholder="Search employees by name or email..."
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}

@@ -26,36 +26,46 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
   }
 
   return (
-    <div className="pagination">
-      <button
-        className="pagination-btn"
-        onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
-        disabled={currentPage === 1}
-      >
-        &laquo; Previous
-      </button>
-
-      <div className="page-numbers">
-        {pageNumbers.map((page, index) => (
+    <nav aria-label="Employee pagination">
+      <ul className="pagination justify-content-center">
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
           <button
-            key={index}
-            className={`page-num-btn ${currentPage === page ? "active" : ""} ${page === "..." ? "dots" : ""}`}
-            onClick={() => typeof page === "number" && onPageChange(page)}
-            disabled={page === "..."}
+            className="page-link"
+            onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
+            disabled={currentPage === 1}
           >
-            {page}
+            Previous
           </button>
-        ))}
-      </div>
+        </li>
 
-      <button
-        className="pagination-btn"
-        onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
-        disabled={currentPage === totalPages}
-      >
-        Next &raquo;
-      </button>
-    </div>
+        {pageNumbers.map((page, index) => (
+          <li
+            key={index}
+            className={`page-item ${currentPage === page ? "active" : ""} ${page === "..." ? "disabled" : ""}`}
+          >
+            <button
+              className="page-link"
+              onClick={() => typeof page === "number" && onPageChange(page)}
+              disabled={page === "..."}
+            >
+              {page}
+            </button>
+          </li>
+        ))}
+
+        <li
+          className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+        >
+          <button
+            className="page-link"
+            onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
